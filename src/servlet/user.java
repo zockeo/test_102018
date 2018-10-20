@@ -64,6 +64,7 @@ public class user extends HttpServlet {
 
     private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //接受客户端提交数据
+        String ss = request.getParameter("id");
 
     }
 
