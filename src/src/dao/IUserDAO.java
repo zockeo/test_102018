@@ -10,5 +10,8 @@ import java.util.List;
  */
 public interface IUserDAO {
     public boolean check(User user) throws Exception;
+
     public List<User> getByPage(Page pages) throws Exception;
+
+    public void delete(int id) throws Exception;
 }

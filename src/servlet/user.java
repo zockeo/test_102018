@@ -28,11 +28,11 @@ public class user extends HttpServlet {
         String action = request.getParameter("action");
         if("show".equals(action)) {
             show(request,response);
-        } else {
-            if("delete".equals(action)) {
-                delete(request,response);
+        } else if("delete".equals(action)) {
+                del(request,response);
             }
-            show(request,response);
+        else {
+            show(request, response);
         }
     }
 
@@ -62,9 +62,18 @@ public class user extends HttpServlet {
         }
     }
 
-    private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void del(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //接受客户端提交数据
         String ss = request.getParameter("id");
+        int id = 0 ;
+        try{
+            id = Integer.parseInt(ss.trim());
+            userDao.delete(id);
+            response.sendRedirect("user");
+            return ;
+        } catch (Exception e){
+            throw new ServletException(e);
+        }
 
     }
 

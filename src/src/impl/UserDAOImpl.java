@@ -93,6 +93,20 @@ public class UserDAOImpl implements IUserDAO {
         return res;
     }
 
+    @Override
+    public void delete(int id) throws Exception {
+        Connection conn= null ;
+        try{
+            conn = ConnectionManager.getConn();
+            PreparedStatement ps = conn.prepareStatement("delete from user where id = ?");
+            ps.setInt(1,id);
+            ps.executeUpdate();
+            ps.close();
+        }finally {
+            ConnectionManager.closeConn(conn);
+        }
+    }
+
     private User getBean(ResultSet rs) throws Exception {
         User user = new User();
         user.setId(rs.getInt("id"));

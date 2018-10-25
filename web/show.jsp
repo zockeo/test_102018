@@ -18,7 +18,13 @@
     <script>
       $(function () {
           $(".delete").click(function () {
-              console.info(this);
+              $this = $(this);
+              var name = $this.next().val();
+              var b = confirm("are you sure to delete "+name+" user ?");
+              if(b){
+                  location.href = this.href;
+              }
+              return false;
           })
       });
     </script>
@@ -53,7 +59,7 @@
           <td>
             <a>details</a>|
             <a>modify</a>|
-            <a class="delete" href="user?action=delete&id=">delete</a></td>
+            <a class="delete" href="user?action=delete&id=<%=uList.getId()%>">delete</a><input type="hidden" value="<%=uList.getUsername()%>"></td>
         </tr>
       <%}%>
       </tbody>
