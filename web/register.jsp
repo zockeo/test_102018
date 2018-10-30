@@ -1,4 +1,6 @@
 <%@ page import="src.util.StringUtils" %>
+<%@ page import="java.util.List" %>
+<%@ page import="src.entity.Role" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -44,7 +46,7 @@
     </style>
   </head>
   <body>
-    <form action="register" method="get" id="frm">
+    <form action="register" method="post" id="frm" enctype="multipart/form-data">
       <table >
         <caption>
           <span class="error"><%=request.getAttribute("msg") != null ?request.getAttribute("msg"):"" %></span>
@@ -70,7 +72,17 @@
         <tr>
           <td>role</td>
           <td>
-            <select name="roleId" ></select>
+            <select name="roleId" >
+              <option value="" >--select--</option>
+              <%
+                Object oj = application.getAttribute("roleList");
+                if(oj !=null && oj instanceof List && ((List) oj).size()>0){
+                  List<Role> rList = (List<Role>)oj;
+                  for(Role temp : rList) {
+              %>
+              <option value="<%=temp.getId()%>"><%=temp.getName()%></option>
+              <%}}%>
+            </select>
           </td>
         </tr>
         <tr>
